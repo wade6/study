@@ -1,5 +1,6 @@
 package com.alibaba.webx.study.io;
 
+import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -9,19 +10,22 @@ import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.io.PipedInputStream;
 import java.io.PipedOutputStream;
+import java.io.PrintStream;
 import java.io.RandomAccessFile;
 import java.io.Reader;
+import java.io.SequenceInputStream;
 import java.io.Writer;
 
 /**
  * 关于字节流和字符流的区别
  * 实际上字节流在操作的时候本身是不会用到缓冲区的，是文件本身的直接操作的，
  * 但是字符流在操作的 时候下后是会用到缓冲区的，是通过缓冲区来操作文件的。
- * 可以试着将上面的字节流和字符流的程序的最后一行关闭文件的代码注释掉，然后运行程序看看。
+ * 可以试着将字节流和字符流的程序的最后一行关闭文件的代码注释掉，然后运行程序看看。
  * 会发现使用字节流的话，文件中已经存在内容，但是使用字符流的时候，文件中还是没有内容的，这个时候就要刷新缓冲区。
  */
 public class IOOperate {
@@ -41,11 +45,19 @@ public class IOOperate {
 		
 //		memStream();
 		
-		pipedStream();
+//		pipedStream();
+		
+//		redirection();
+	    
+//	    BufferedReaderTest();
+	    
+	    SequenceInputStream();
 		
 		
 	}
-	// RandomAccessFile
+	/**
+	 *  RandomAccessFile
+	 */
 	private static void random() throws IOException{
 		String src = "d:\\io\\randomFile.txt";
 		File f = FileOperate.createFile(src);
@@ -56,7 +68,9 @@ public class IOOperate {
 		demo.close();
 	}
 	
-	// 字节流：整个字符串写入 FileOutputStream
+	/**
+	 *  字节流：整个字符串写入 FileOutputStream
+	 */
 	private static void writeString() throws Exception{
 		String src = "d:\\io\\writeString.txt";
 		File f = FileOperate.createFile(src);
@@ -73,7 +87,9 @@ public class IOOperate {
 		out.close();
 	}
 	
-	// 字节流：单个字节写入 FileOutputStream
+	/**
+	 *  字节流：单个字节写入 FileOutputStream
+	 */
 	private static void writeByByte() throws Exception{
 		String src = "d:\\io\\writeString.txt";
 		File f = FileOperate.createFile(src);
@@ -92,7 +108,9 @@ public class IOOperate {
 		out.close();
 	}
 	
-	//  字节流：读取文件
+	/**
+	 *   字节流：读取文件
+	 */
 	private static void readFile() throws Exception{
 		String src = "d:\\io\\writeString.txt";
 		File f = FileOperate.createFile(src);
@@ -109,7 +127,9 @@ public class IOOperate {
 		
 	}
 	
-	// 字符流 : 读写文件
+	/**
+	 *  字符流 : 读写文件
+	 */
 	private static void CharStream() throws Exception{
 		String src = "d:\\io\\writeString.txt";
 		File f = FileOperate.createFile(src);
@@ -139,6 +159,8 @@ public class IOOperate {
 	}
 	
 	/**
+	 * 字节与字符转换流
+	 * 
 	 * OutputStreramWriter将输出的字符流转化为字节流
 	 * InputStreamReader将输入的字节流转换为字符流
 	 * @throws Exception 
@@ -168,6 +190,7 @@ public class IOOperate {
 	
 	/**
 	 * 内存操作流
+	 * 
 	 * ByteArrayInputStream 主要将内容写入内存
 	 * ByteArrayOutputStream  主要将内容从内存输出
 	 * @throws Exception 
@@ -190,6 +213,8 @@ public class IOOperate {
 	}
 	
 	/**
+	 * 管道流
+	 * 
 	 * 管道流主要可以进行两个线程之间的通信。
 	 * PipedOutputStream 管道输出流
 	 * PipedInputStream 管道输入流
@@ -197,6 +222,7 @@ public class IOOperate {
 	 */
 	private static void pipedStream() throws Exception{
 		
+	    // 发送消息的线程
 		class Send implements Runnable{
 			
 			private PipedOutputStream out = null;
@@ -229,6 +255,7 @@ public class IOOperate {
 			
 		}
 		
+		// 接受消息的线程
 		class Recive implements Runnable{
 			
 			private PipedInputStream in = null;
@@ -262,14 +289,86 @@ public class IOOperate {
 			
 		}
 		
+		// 初始化两个线程
 		Send s = new Send();
 		Recive r = new Recive();
+		
 		// 管道连接
 		s.getOut().connect(r.getIn());
 		
+		// 运行线程
 		new Thread(s).start();
 		new Thread(r).start();
 		
 	}
+	
+	/**
+	 * 输入输出重定向
+	 * @throws Exception 
+	 */
+	private static void redirection() throws Exception{
+	    // 输出重定向
+	    System.out.println("显示在屏幕");
+	    
+	    String src = "/home/huamo/io/writeString.txt";
+        File f = FileOperate.createFile(src);
+        
+        System.setOut(new PrintStream(new FileOutputStream(f)));
+        
+        System.out.println("通过System.out.println输入到文件里了");
+	}
+	
+	/**
+	 * BufferedReader
+	 * @throws IOException 
+	 */
+	
+	private static void BufferedReaderTest() throws IOException{
+	    InputStreamReader in = new InputStreamReader(System.in);
+	    System.out.println("请输入：");
+	    char[] ch = new char[100];
+	    // 等待输入
+	    in.read(ch);
+	    
+	    System.out.println("读入的内容为："+new String(ch));
+	    
+	    BufferedReader br = new BufferedReader(in);
+	    System.out.println("请输入：");
+	 // 等待输入
+	    String input = br.readLine();
+	    System.out.println("读入的内容2为："+input);
+	    
+	    br.close();
+	}
+	
+	/**
+	 * SequenceInputStream  合并流
+	 * @throws Exception 
+	 */
+	private static void SequenceInputStream() throws Exception{
+	    InputStream in1 = new ByteArrayInputStream("hello".getBytes());
+	    InputStream in2 = new ByteArrayInputStream("你好".getBytes());
+	    
+	    SequenceInputStream ss = new SequenceInputStream(in1,in2);
+	    String src = "/home/huamo/io/writeString.txt";
+        File f = FileOperate.createFile(src);
+        
+        FileOutputStream out = new FileOutputStream(f);
+        
+        int temp;
+        
+        while((temp=ss.read())!=-1){
+            out.write(temp);
+        }
+        
+        out.close();
+        ss.close();
+	    
+	}
+	
+	
+	
+	
+	
 
 }

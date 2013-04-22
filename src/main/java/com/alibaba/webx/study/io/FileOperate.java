@@ -13,11 +13,10 @@ public class FileOperate {
 	public static void main(String[] args) {
 		String src = "d:\\newFile.txt";// c盘拒绝访问
 		
-		createFile(src);
-		
 		// 使用File常量，易实现跨平台
-		String src2 = "d:"+File.separator+"newFile2.txt";
-		createFile(src2);
+		src = "d:"+File.separator+"newFile2.txt";
+		
+		createFile(src);
 		
 		deleteFile(src);
 		
