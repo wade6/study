@@ -19,16 +19,27 @@ public class ExtendsThreadTest extends Thread {
 	public void run(){
 		for(int i=0;i<10;i++){
 			System.out.println(name+":"+i);
+			
+			// 特定条件下，线程主动将执行权交给其他线程
 			if(i==3){
 				 System.out.println("线程的礼让");
+				 // 让出执行权
 				Thread.yield();
 			}
+			try {
+                Thread.sleep(10);
+            } catch (InterruptedException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
 		}
 	}
 	
 	public static void main(String[] args) {
+	    // 声明两个线程
 		ExtendsThreadTest e1 = new ExtendsThreadTest("e1");
 		ExtendsThreadTest e2 = new ExtendsThreadTest("e2");
+		
 		// 调用方法不对,还是按顺序运行
 //		e1.run(); 
 //		e2.run(); 
@@ -36,6 +47,8 @@ public class ExtendsThreadTest extends Thread {
 		// 因为需要用到CPU的资源，所以每次的运行结果基本是都不一样的
 		e1.start();
 		e2.start();
+		
+		System.out.println("main end");
 	}
 
 }
