@@ -51,7 +51,6 @@ public class IOOperate {
 	    
 //	    BufferedReaderTest();
 	    
-	    SequenceInputStream();
 		
 		
 	}
@@ -340,35 +339,6 @@ public class IOOperate {
 	    
 	    br.close();
 	}
-	
-	/**
-	 * SequenceInputStream  合并流
-	 * @throws Exception 
-	 */
-	private static void SequenceInputStream() throws Exception{
-	    InputStream in1 = new ByteArrayInputStream("hello".getBytes());
-	    InputStream in2 = new ByteArrayInputStream("你好".getBytes());
-	    
-	    SequenceInputStream ss = new SequenceInputStream(in1,in2);
-	    String src = "/home/huamo/io/writeString.txt";
-        File f = FileOperate.createFile(src);
-        
-        FileOutputStream out = new FileOutputStream(f);
-        
-        int temp;
-        
-        while((temp=ss.read())!=-1){
-            out.write(temp);
-        }
-        
-        out.close();
-        ss.close();
-	    
-	}
-	
-	
-	
-	
 	
 
 }
