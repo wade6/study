@@ -17,6 +17,7 @@
 
 package com.alibaba.webx.study.app1;
 
+
 public class Visitor {
     private String name;
 
@@ -27,4 +28,5 @@ public class Visitor {
     public void setName(String name) {
         this.name = name;
     }
+    
 }
