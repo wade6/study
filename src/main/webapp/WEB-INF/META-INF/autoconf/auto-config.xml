@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+
+	<!-- ======================================== -->
+    <!--               属性的定义                                    -->
+    <!-- ======================================== -->
+	
+	<group>
+	
+		<property name="mywebx3.workDir" defaultValue="E:/test/mywebx3" description="应用程序的工作目录" />
+		
+		<property name="mywebx3.loggingRoot" defaultValue="${mywebx3.workDir}/output" description="日志文件目录" />
+		
+		<property name="mywebx3.loggingLevel" defaultValue="info" description="日志文件级别">
+			<validator name="choice" choice="trace, debug, info, warn, error" />
+		</property>
+		
+		<property name="mywebx3.loggingCharset" defaultValue="UTF-8" description="日志文件编码" />
+		
+	</group>
+	
+	<!-- ======================================== -->
+    <!--             需要配置的文件                              -->
+    <!-- ======================================== -->
+    
+	<script>
+	
+		<generate template="log4j.xml.vm" destfile="WEB-INF/log4j.xml" charset="UTF-8"/>
+		<generate template="WEB-INF/classes/log4w.xml" />
+		
+	</script>
+</config>
