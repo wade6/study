@@ -12,7 +12,7 @@ import java.rmi.RemoteException;
 import com.alibaba.webx.study.my.rmi.AppService;
 
 /**
- * 
+ * 具体实现参见rmitest目录
  * @author zhaoyuanli
  * 2013-5-13下午11:01:35
  */

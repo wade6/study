@@ -13,7 +13,7 @@ import com.alibaba.webx.study.my.rmi.AppService;
 import com.alibaba.webx.study.my.rmi.AppServiceImpl;
 
 /**
- * 
+ * 具体实现参见rmitest目录
  * @author zhaoyuanli
  * 2013-5-13下午10:59:38
  */
