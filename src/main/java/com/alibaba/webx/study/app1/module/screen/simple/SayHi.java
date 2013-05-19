@@ -18,9 +18,14 @@
 package com.alibaba.webx.study.app1.module.screen.simple;
 
 import java.io.PrintWriter;
+
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+
+import com.alibaba.webx.study.app1.biz.dao.UserDAO;
+import com.alibaba.webx.study.app1.biz.object.UserDO;
 
 /**
  * 这是最简单的页面：不需要模板，直接输出到浏览器，就像最简单的servlet一样。
@@ -30,8 +35,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 public class SayHi {
     @Autowired
     private HttpServletResponse response;
+    
+    @Resource
+    private UserDAO userDAO;
 
     public void execute() throws Exception {
+        UserDO userDO =new UserDO();
+        userDO.setPassword("1Q2W3E");
+        userDO.setUsername("hello");
+        userDAO.addUser(userDO);
+        
         // 设置content type，但不需要设置charset。框架会设置正确的charset。
         response.setContentType("text/plain");
 
@@ -40,4 +53,5 @@ public class SayHi {
 
         out.println("Hi there, how are you doing today?");
     }
+    
 }

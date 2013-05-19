@@ -1,7 +1,7 @@
 package com.alibaba.webx.study.my.thread;
 
 /**
- * 实现Runnable接口
+ * 实现Runnable接口,创建任务，然后传递给Thread，实现线程的依附
  * 
  * 如果一个类继承Thread，则不适合资源共享。但是如果实现了Runable接口的话，则很容易的实现资源共享。
  * 
