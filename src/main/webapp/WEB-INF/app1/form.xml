@@ -33,7 +33,7 @@
         <group name="register" extends="csrfCheck">
             <field name="name" displayName="你的名字">
                 <fm-validators:required-validator>
-                    <message>必须填写 ${displayName}</message>
+                    <message>必须填写 </message>
                 </fm-validators:required-validator>
             </field>
         </group>

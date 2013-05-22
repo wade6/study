@@ -18,8 +18,8 @@
 		<project.build.sourceEncoding>${java.encoding}</project.build.sourceEncoding>
 		<productionMode>false</productionMode>
 		<autoconfig-plugin-version>1.0.9</autoconfig-plugin-version>
-		<ibatis-version>2.3.4.726_4</ibatis-version>
-		<dbcp-version>1.2.2</dbcp-version>
+		<ibatis-version>2.3.5</ibatis-version>
+		<dbcp-version>1.3</dbcp-version>
 		<mysql-version>5.1.6</mysql-version>
 	</properties>
 	<dependencies>
@@ -44,8 +44,8 @@
 
 		<!-- 集成 ibatis -->
 		<dependency>
-			<groupId>org.apache.servicemix.bundles</groupId>
-			<artifactId>org.apache.servicemix.bundles.ibatis-sqlmap</artifactId>
+			<groupId>org.apache.ibatis</groupId>
+			<artifactId>ibatis-sqlmap</artifactId>
 		</dependency>
 
 		<!-- mysql驱动 -->
@@ -175,15 +175,17 @@
 				<scope>provided</scope>
 			</dependency>
 
-			<!-- 集成 ibatis -导入依赖包 -->
+			<!-- 数据库连接池 -导入依赖包 -->
 			<dependency>
 				<groupId>commons-dbcp</groupId>
 				<artifactId>commons-dbcp</artifactId>
 				<version>${dbcp-version}</version>
 			</dependency>
+
+			<!-- 集成 ibatis -导入依赖包 -->
 			<dependency>
-				<groupId>org.apache.servicemix.bundles</groupId>
-				<artifactId>org.apache.servicemix.bundles.ibatis-sqlmap</artifactId>
+				<groupId>org.apache.ibatis</groupId>
+				<artifactId>ibatis-sqlmap</artifactId>
 				<version>${ibatis-version}</version>
 			</dependency>
 
