@@ -20,7 +20,8 @@ public class MyTask extends TimerTask{
      */
     @Override
     public void run() {
-        System.out.println("execute my task!");
+        System.out.println("==== execute my task by spring!");
+        System.out.println(" ");
     }
 
 }
