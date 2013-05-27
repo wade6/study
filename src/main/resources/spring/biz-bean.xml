@@ -7,6 +7,9 @@
 
 	<!-- DAO beans -->
 	<bean id="userDAO" class="com.alibaba.webx.study.app1.biz.dao.impl.UserDAOImpl" />
+	
+	<!-- service beans -->
+	<bean id="userService" class="com.alibaba.webx.study.app1.biz.service.impl.UserServiceImpl" />
 
 
 </beans>
