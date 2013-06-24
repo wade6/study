@@ -2,12 +2,13 @@
 <classpath>
 	<classpathentry including="**/*.java" kind="src" output="target/test-classes" path="src/test/java"/>
 	<classpathentry excluding="**/*.java" kind="src" output="target/test-classes" path="src/test/resources"/>
-	<classpathentry including="**/*.java|**/*.xml" kind="src" path="src/main/java"/>
+	<classpathentry including="**/*.*" kind="src" path="src/main/java"/>
 	<classpathentry excluding="**/*.java" kind="src" path="src/main/resources"/>
 	<classpathentry kind="var" path="M2_REPO/javax/servlet/javax.servlet-api/3.0.1/javax.servlet-api-3.0.1.jar" sourcepath="M2_REPO/javax/servlet/javax.servlet-api/3.0.1/javax.servlet-api-3.0.1-sources.jar"/>
 	<classpathentry kind="var" path="M2_REPO/com/intellij/annotations/9.0.4/annotations-9.0.4.jar" sourcepath="M2_REPO/com/intellij/annotations/9.0.4/annotations-9.0.4-sources.jar"/>
 	<classpathentry kind="var" path="M2_REPO/aopalliance/aopalliance/1.0/aopalliance-1.0.jar" sourcepath="M2_REPO/aopalliance/aopalliance/1.0/aopalliance-1.0-sources.jar"/>
 	<classpathentry kind="var" path="M2_REPO/aspectjweaver/aspectjweaver/1.6.2/aspectjweaver-1.6.2.jar"/>
+	<classpathentry kind="var" path="M2_REPO/org/beanshell/bsh/2.0b4/bsh-2.0b4.jar"/>
 	<classpathentry kind="var" path="M2_REPO/cglib/cglib-nodep/2.2.2/cglib-nodep-2.2.2.jar" sourcepath="M2_REPO/cglib/cglib-nodep/2.2.2/cglib-nodep-2.2.2-sources.jar"/>
 	<classpathentry kind="var" path="M2_REPO/com/alibaba/citrus/citrus-webx-all/3.2.0/citrus-webx-all-3.2.0.jar" sourcepath="M2_REPO/com/alibaba/citrus/citrus-webx-all/3.2.0/citrus-webx-all-3.2.0-sources.jar"/>
 	<classpathentry kind="var" path="M2_REPO/commons-codec/commons-codec/1.6/commons-codec-1.6.jar" sourcepath="M2_REPO/commons-codec/commons-codec/1.6/commons-codec-1.6-sources.jar"/>

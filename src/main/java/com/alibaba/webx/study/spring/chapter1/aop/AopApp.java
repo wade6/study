@@ -8,6 +8,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 /**
+ * XmlBeanFactory不支持AOP
  * @author zhaoyuanli 2013-6-20下午11:00:48
  */
 public class AopApp {

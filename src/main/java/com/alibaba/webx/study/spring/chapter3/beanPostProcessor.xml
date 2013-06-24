@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:lang="http://www.springframework.org/schema/lang"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans-2.0.xsd
+		http://www.springframework.org/schema/lang
+		http://www.springframework.org/schema/lang/spring-lang-2.0.xsd">
+		
+	<bean id="upperCaseName" class="com.alibaba.webx.study.spring.chapter3.beanpostprocessor.UpperCaseNameProcessor"/>
+	<bean id="person" class="com.alibaba.webx.study.spring.chapter3.beanpostprocessor.Person"/>
+	
+	<bean id="person2" class="com.alibaba.webx.study.spring.chapter3.beanfactorypostprocessor.Person2">
+		<property name="names" value="${name}" />
+		<property name="age" value="${age}" />
+	</bean>
+	<bean class ="com.alibaba.citrus.service.configuration.support.PropertyPlaceholderConfigurer" >
+		<property name="location" value="com/alibaba/webx/study/spring/chapter3/beanfactorypostprocessor/person.properties"/>
+	</bean>
+	
+	<bean id="person3" class="com.alibaba.webx.study.spring.chapter3.shellbean.Person3">
+		<property name="drink" ref="drink" />
+	</bean>
+	
+	<lang:bsh id="drink"
+		script-source="classpath:com/alibaba/webx/study/spring/chapter3/shellbean/Drink.bsh"
+		script-interfaces="com.alibaba.webx.study.spring.chapter3.shellbean.Drink" 
+		refresh-check-delay="1000"/>
+	
+</beans>

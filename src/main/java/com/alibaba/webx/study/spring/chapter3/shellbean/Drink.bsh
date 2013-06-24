@@ -1,0 +1,3 @@
+void getDrinkThing() {
+System.out.println("water!");
+}
