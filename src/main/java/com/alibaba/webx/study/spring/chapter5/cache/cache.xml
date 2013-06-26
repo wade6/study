@@ -1,0 +1,19 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ehcache="http://www.springmodules.org/schema/ehcache"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+                        http://www.springframework.org/schema/beans/spring-beans-2.0.xsd
+						http://www.springmodules.org/schema/ehcache
+						http://www.springmodules.org/schema/cache/springmodules-ehcache.xsd">
+
+	<ehcache:config
+		configLocation="classpath:com/alibaba/webx/study/spring/chapter5/cache/ehcache.xml" />
+
+	<ehcache:proxy id="userDao" refId="rantDaoTarget">
+		<ehcache:caching methodName="find"
+			cacheName="rantzCache" />
+	</ehcache:proxy>
+
+
+
+
+</beans>

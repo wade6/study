@@ -1,0 +1,61 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+http://www.springframework.org/schema/beans/spring-beans-2.0.xsd">
+
+	<!-- dbcp 数据库连接池 -->
+	<bean id="dataSourcePool" class="org.apache.commons.dbcp.BasicDataSource">
+		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
+		<property name="url" value="jdbc:mysql://127.0.0.1:3306/ace" />
+		<property name="username" value="root" />
+		<property name="password" value="root" />
+		<property name="initialSize" value="5" />
+		<property name="maxActive" value="10" />
+	</bean>
+
+	<!-- 每次都创建一个新连接 -->
+	<bean id="dataSourceNewOneTime"
+		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
+		<property name="url" value="jdbc:mysql://127.0.0.1:3306/ace" />
+		<property name="username" value="root" />
+		<property name="password" value="root" />
+	</bean>
+
+	<!-- 始终使用一个连接 -->
+	<bean id="dataSourceOnce"
+		class="org.springframework.jdbc.datasource.SingleConnectionDataSource">
+		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
+		<property name="url" value="jdbc:mysql://127.0.0.1:3306/ace" />
+		<property name="username" value="root" />
+		<property name="password" value="root" />
+	</bean>
+
+	<bean id="jdbcDAO" class="com.alibaba.webx.study.spring.chapter5.jdbc.JdbcDAO">
+		<property name="dataSource" ref="dataSourceOnce" />
+	</bean>
+
+
+	<!-- ========== -->
+
+	<!-- hibernate template <bean id="hibernateTemplate" class="org.springframework.orm.hibernate3.HibernateTemplate"> 
+		<property name="sessionFactory" ref="sessionFactory" /> </bean> -->
+
+	<!-- ==========ibatis========== -->
+	
+	<!-- template -->
+	<bean id="sqlMapClientTemplate" class="org.springframework.orm.ibatis.SqlMapClientTemplate">
+		<property name="sqlMapClient" ref="sqlMapClient" />
+	</bean>
+
+	<!-- sqlMapClient -->
+	<bean id="sqlMapClient" class="org.springframework.orm.ibatis.SqlMapClientFactoryBean">
+		<property name="dataSource" ref="dataSourcePool" />
+		<property name="configLocation" value="classpath:com/alibaba/webx/study/spring/chapter5/ibatis/sql-map-config.xml" />
+	</bean>
+	
+	<bean id="userDAO"  class="com.alibaba.webx.study.spring.chapter5.ibatis.UserDAOImpl" >
+		<property name="sqlMapClientTemplate" ref="sqlMapClientTemplate" />
+	</bean>
+
+</beans>
