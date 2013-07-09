@@ -43,19 +43,28 @@ http://www.springframework.org/schema/beans/spring-beans-2.0.xsd">
 
 	<!-- ==========ibatis========== -->
 	
-	<!-- template -->
-	<bean id="sqlMapClientTemplate" class="org.springframework.orm.ibatis.SqlMapClientTemplate">
-		<property name="sqlMapClient" ref="sqlMapClient" />
-	</bean>
-
 	<!-- sqlMapClient -->
 	<bean id="sqlMapClient" class="org.springframework.orm.ibatis.SqlMapClientFactoryBean">
 		<property name="dataSource" ref="dataSourcePool" />
 		<property name="configLocation" value="classpath:com/alibaba/webx/study/spring/chapter5/ibatis/sql-map-config.xml" />
 	</bean>
 	
+	<!-- SqlMapClientTemplate -->
+	<bean id="sqlMapClientTemplate" class="org.springframework.orm.ibatis.SqlMapClientTemplate">
+		<property name="sqlMapClient" ref="sqlMapClient" />
+	</bean>
+
 	<bean id="userDAO"  class="com.alibaba.webx.study.spring.chapter5.ibatis.UserDAOImpl" >
 		<property name="sqlMapClientTemplate" ref="sqlMapClientTemplate" />
+		<property name="transactionTemplate" ref="transactionTemplate" />
+	</bean>
+	
+	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSourcePool"/>
+	</bean>
+	
+	<bean id="transactionTemplate" class="org.springframework.transaction.support.TransactionTemplate">
+		<property name="transactionManager" ref="transactionManager" />
 	</bean>
 
 </beans>
