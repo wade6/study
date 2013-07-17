@@ -1,0 +1,240 @@
+
+<div class="row mxb">
+	<div>
+		<h2>录入销售计划</h2>
+		<hr/>
+			<form id="J_Form" class="form-horizontal well" action="" method="post">
+				<input type="hidden" name="action" value="planAction"/>
+				<input type="hidden" name="event_submit_do_save" value="any"/>
+	
+				<div class="row show-grid">
+					
+					<div class="span12">
+						<label class="control-label">前台商品ID：</label>
+						<div class="controls">
+							<input  class="input-normal control-text" data-rules="{number:true}" id="J_ItemId" name="itemId" type="text">
+						</div>  
+						<button class="button button-small" type="button" id="getItem">获取信息</button>
+					</div>
+				
+					<div class="span12">
+							<label class="control-label">后台商品ID：</label>
+							<div class="controls">
+								<input class="input-normal control-text" id="J_ProductId" data-rules="{number:true}" name="productId" type="text">
+							</div> 
+					</div>
+					
+				</div>  
+				
+				
+				
+				<div class="row show-grid">
+					
+					<div class="span12">
+						<label class="control-label"><s>*</s>店铺：</label>
+						<div class="controls">
+							<input id="shopNick" class="input-normal control-text"  data-rules="{required:true}"  type="text"><span class="tips tips-small tips-warning tips-no-icon">同一品牌名称必须相同</span>
+						</div> 
+					</div>
+			
+					<div class="span12">
+						<label class="control-label"><s>*</s>销售类型：</label>
+						<div class="controls">
+							<select name="modelType" data-rules="{required:true}">
+								<option value="" selected='selected'>请选择</option>
+								<option value="1">集采</option>
+								<option value="2">统供</option>
+							</select>
+						</div>
+					</div>
+					
+				</div>  
+		
+		
+				<div class="row show-grid">
+					<div class="span24">
+						<label class="control-label"><s>*</s>激励时间：</label>
+						<div class="bui-form-group controls" data-rules="{dateRange : true,notBefore:true}">
+							<input type="text" id="J_Start"  data-rules="{required:true}" class="calendar"  readonly="readonly" /> 
+							- <input type="text" id="J_End" class="calendar"  data-rules="{required:true}"  readonly="readonly" />
+						</div>
+					</div>
+				</div>  
+	 
+    
+	 
+				<div class="row show-grid">
+					<div class="span12">
+						<label class="control-label"><s>*</s>公司：</label>
+						<div class="controls">
+							<input id="companyName"  data-rules="{required:true}" class="input-normal control-text"  type="text">
+						</div> 
+				    </div>
+					
+					<div class="span12">
+						<label class="control-label"><s>*</s>补贴模式：</label>
+						<div class="controls">
+							<select id="J_PatternType"   data-rules="{required:true}">
+								<option value="" selected='selected'>请选择</option>
+								<option value="1">集采模式</option>
+								<option value="2">资源包模式</option>
+							</select>
+						</div>
+					</div>
+					
+				</div> 
+				
+				
+				<div class="row show-grid">
+					<div class="span12">
+						<label class="control-label"><s>*</s>货量：</label>
+						<div class="controls">
+							<input class="input-normal control-text"   data-rules="{number:true,required:true}" type="text">
+						</div>
+					</div>
+				</div>
+				      
+				<div class="row show-grid">
+					<div class="span12">
+						<label class="control-label"><s>*</s>天猫售价：</label>
+						<div class="controls">
+							<input class="input-normal control-text" data-rules="{number:true,required:true}"  type="text">
+						</div>
+					</div>
+				</div>
+					
+				<div class="row show-grid">
+					<div class="span12">
+						<label class="control-label">关键属性/配置：</label>
+						<div class="controls">
+							<input class="input-normal control-text"  type="text">
+						</div>
+					</div>
+				</div>  
+				
+				<div class="row show-grid">
+					<div class="span24">
+						<label class="control-label">备注：</label>
+						<div class="controls control-row-auto">
+							<textarea type="text" class="input-large"  data-valid="{}" style></textarea>
+						</div>
+					</div>
+				</div>
+
+
+			
+				<div class="row show-grid">
+					<div class="span24">
+						<div class="form-actions offset3 ">
+							<button id="J_Button" type="button" class="button button-primarybutton button-danger">保存</button>
+							<button type="reset" class="button">重置</button>
+						</div>
+					</div>
+				</div>
+				
+			</form>
+	</div>
+</div>
+
+	 
+<script type="text/javascript">
+	
+      // 日历
+      var Calendar = BUI.Calendar
+      var datepicker = new Calendar.DatePicker({
+        trigger:'.calendar',
+        autoRender : true
+      });
+		  
+		  
+	  // form表单
+	  var Form = BUI.Form;
+	  
+	  var form=new Form.Form({
+        srcNode : '#J_Form'
+      }).render();
+	  
+	  
+	  // rpc调用
+	  $("#getItem").click(function(ev){
+        	
+          jQuery.get("/nmd/plan/getItemById.json",{'itemId':$("#J_ItemId").val()},function(data) {
+        	 if(data.success){
+			 	alert("获取成功！");
+				
+				// 删除错误提示
+				form.clearErrors();
+				  
+        		$("#brands").val(data.paramMap.brands);
+				$("#companyName").val(data.paramMap.companyName);
+				$("#model").val(data.paramMap.model);
+				$("#shopNick").val(data.paramMap.nick);
+        	 }else{
+			 	alert(data.error);
+			 }
+          });
+        
+        });
+		
+		// 提交按钮
+		$("#J_Button").click(function(ev){
+			
+			var patternType = $("#J_PatternType").val();
+			
+			if(patternType==2){// 仅集采模式的销售计划，激励期可以跨月
+				var startTime = new Date($("#J_Start").val()); 
+				var endTime = new Date($("#J_End").val());
+				if(startTime.getMonth()!=endTime.getMonth()){
+						 alert('资源包模式的激励起止时间必须在一个自然月内！');
+						 return ;
+				}
+			}
+			
+			jQuery.get("/nmd/plan/validateItem.json",{'itemId':$("#J_ItemId").val(),
+			'productId':$("#J_ProductId").val(),
+			'startTime':$("#J_Start").val(),
+			'endTime':$("#J_End").val()},function(data) {
+        	 if(data.success){
+			 	form.submit();
+        	 }else{
+			 	alert(data.error);
+			 }
+          });
+			
+		});
+	  
+	  
+	   // 增加校验规则
+	   Form.Rules.add({
+                name : 'oneMonth', //规则名称
+                msg : '激励起止时间必须在一个自然月内！',//默认显示的错误信息
+                 validator : function(value,baseValue,formatMsg,group){ //验证函数，验证值、基准值、格式化后的错误信息、goup控件
+					var start = group.getFieldAt(0).get('value'),
+                    end = group.getFieldAt(1).get('value');
+					
+					var startTime = new Date(start);
+					var endTime = new Date(end);
+					
+					if(startTime.getMonth()!=endTime.getMonth()){
+						 return formatMsg;
+					}
+
+                 }
+           });
+		   
+		Form.Rules.add({
+                name : 'notBefore', //规则名称
+                msg : '激励时间必须为当前或以后月份！',//默认显示的错误信息
+                 validator : function(value,baseValue,formatMsg,group){ //验证函数，验证值、基准值、格式化后的错误信息、goup控件
+					var start = group.getFieldAt(0).get('value');
+					var startTime = new Date(start),now = new Date();
+					
+					if(startTime.getMonth()<now.getMonth()){
+						 return formatMsg;
+					}
+
+                 }
+           });
+      
+</script>
+
