@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans-2.0.xsd" >
+
+	<!-- 通知实现 -->
+	<bean id="adviceForProxy" class="com.alibaba.webx.study.spring.chapter4.aop.proxyaop.AdviceForProxy" />
+	
+	<!-- 通知和切面的配置 ，对配置文件中任何类的doThing方法进行aop-->
+	<bean id="personAdvisor" class="org.springframework.aop.aspectj.AspectJExpressionPointcutAdvisor">
+		<property name="advice" ref="adviceForProxy" />
+		<property name="expression" value="execution(* *.doThing(..))" />
+	</bean>
+	
+	<!-- 生成代理类，实现AOP -->
+	<bean class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator" />
+	
+	
+	<bean id="person" class="com.alibaba.webx.study.spring.chapter4.aop.Person" />
+
+</beans>

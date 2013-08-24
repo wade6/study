@@ -62,7 +62,7 @@
             </id>
             <stores>
                 <session-stores:cookie-store id="temporaryCookie">
-                    <cookie name="tmp" />
+                    <cookie name="test" />
                 </session-stores:cookie-store>
             </stores>
             <store-mappings>

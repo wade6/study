@@ -1,6 +1,6 @@
 
 <div class="row mxb">
-	<div>
+	<div class="offset1">
 		<h2>录入销售计划</h2>
 		<hr/>
 			<form id="J_Form" class="form-horizontal well" action="" method="post">
