@@ -73,6 +73,10 @@ public class BeanUtil {
 		test2();
 	}
 	
+	/**
+	 * [name=test,age=12,birthday=Sun Aug 25 08:20:47 GMT+08:00 2013,favorite=[bob, tou]]
+     * [name=test,age=12,birthday=Sun Aug 25 08:20:47 GMT+08:00 2013,favorite=[bob, tou]]
+	 */
 	private static void test1(){
 		Person p1 = new Person();
 		p1.setName("test");
