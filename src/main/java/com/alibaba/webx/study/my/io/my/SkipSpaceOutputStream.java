@@ -9,6 +9,8 @@ import java.io.OutputStream;
 /**
  * 利用装饰模式，实现一个转换空格为星号的输出字节流
  * 
+ * 继承 FilterOutputStream  实现write方法；构造函数接收一个 OutputStream
+ * 
  */
 public class SkipSpaceOutputStream extends FilterOutputStream {
 
