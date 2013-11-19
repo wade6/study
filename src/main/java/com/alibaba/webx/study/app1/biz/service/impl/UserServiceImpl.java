@@ -5,6 +5,7 @@
 package com.alibaba.webx.study.app1.biz.service.impl;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.transaction.annotation.Transactional;
 
@@ -19,16 +20,21 @@ import com.alibaba.webx.study.app1.biz.service.UserService;
  */
 public class UserServiceImpl implements UserService {
     
-    @Resource
+//    @Resource
     private UserDAO userDAO;
+    
+    @Resource
+    private HttpServletRequest request;
 
     /**
      * @author zhaoyuanli
      * 2013-5-27下午11:04:41
      */
     @Override
-    @Transactional
+//    @Transactional
     public boolean addUser(UserDO userDO) {
+    	
+    	System.out.println(request.getAttributeNames());
         // TODO Auto-generated method stub
         boolean result =  userDAO.addUser(userDO);
         if(result){

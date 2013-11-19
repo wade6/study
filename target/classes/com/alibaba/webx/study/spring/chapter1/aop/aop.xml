@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans-2.0.xsd
+		http://www.springframework.org/schema/aop
+		http://www.springframework.org/schema/aop/spring-aop-2.0.xsd">
+		
+	<bean id="knight" class="com.alibaba.webx.study.spring.chapter1.aop.KnightOfTheRoundTable" />
+
+	<bean id="minstrel" class="com.alibaba.webx.study.spring.chapter1.aop.Minstrel" />
+
+	<aop:config>
+		<aop:aspect ref="minstrel">
+		
+			<aop:pointcut id="questPointcut"
+				expression="execution(* *.*(..))" />
+				
+			<aop:before method="singBefore" pointcut-ref="questPointcut" />
+			<aop:after method="singAfter" pointcut-ref="questPointcut" />
+				
+		</aop:aspect>
+	</aop:config>
+
+</beans>
