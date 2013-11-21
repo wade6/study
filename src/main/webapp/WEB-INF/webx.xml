@@ -55,6 +55,7 @@
         <request-contexts:buffered />
         <request-contexts:lazy-commit />
         <request-contexts:parser />
+        <!-- <request-contexts:parser autoUpload="false" /> -->
         <request-contexts:set-locale defaultLocale="zh_CN" defaultCharset="UTF-8" />
         <request-contexts:session>
             <id>
@@ -71,7 +72,7 @@
         </request-contexts:session>
     </services:request-contexts>
 
-    <!-- 支持上传文件。 -->
+    <!-- upload服务，支持上传文件。 -->
     <services:upload sizeMax="5M" />
 
     <!-- 将beans暴露给模板。这里定义的tools可被所有components之间共享。 -->

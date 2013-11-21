@@ -4,6 +4,11 @@ $page.setTitle("系统管理")
 
 <ol>
 	<li>
+        <h2>文件上传</h2>
+		#set($url = "$app1Link.setTarget('upload/fileUpload.htm')")
+		<a href="$url">$url</a>
+    </li>
+	<li>
         <h2>webjs</h2>
 		#set($url = "$app1Link.setTarget('webjs/index.htm')")
 		<a href="$url">$url</a>
