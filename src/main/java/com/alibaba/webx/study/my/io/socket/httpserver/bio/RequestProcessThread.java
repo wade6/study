@@ -48,9 +48,8 @@ public class RequestProcessThread implements Runnable {
 	 */
 	private void paserWithHttp(InputStream in){
 		BufferedReader br = new BufferedReader(new InputStreamReader(in));  
-        
         try {
-			String httpMessage = br.readLine();
+			String httpMessage = br.readLine();// 此处阻塞，readLine会去找换行符判断是否结束写入
 			String[] httpContent = httpMessage.split(" ");//协议状态号，名称，版本号  
 			
 			//如果客戶端输入协议错误则返回错误页面  
