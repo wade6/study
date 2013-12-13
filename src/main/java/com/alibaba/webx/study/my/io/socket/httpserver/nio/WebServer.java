@@ -13,7 +13,7 @@ import java.util.Iterator;
 /**
  * web 服务器启动类
  * 
- * BIO模式多线程socket实现简单web server;进一步改进，使用线程池
+ * NIO模式多线程socket实现简单web server;进一步改进，使用线程池
  * 
  * @author zhaoyuan.lizy
  *

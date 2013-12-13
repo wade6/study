@@ -12,7 +12,8 @@ import java.util.List;
 import com.mysql.jdbc.StringUtils;
 
 /**
- * 单线程的socket server，模拟NIO中Selector
+ * 模拟NIO中Selector（selector中的就绪事件是操作系统通知）
+ * 问题：线程一直在运行；占用cpu
  * 
  * @author zhaoyuan.lizy
  *
@@ -25,17 +26,20 @@ public class SocketServer {
 		
 		ServerSocket server = new ServerSocket(8010);//创建一个ServerSocket在端口8010监听客户请求
 		
-		System.out.println("start");
-		
-		Socket conn = server.accept();//使用accept()阻塞等待客户请求
-		
-		System.out.println("client is coming"+new Date().toGMTString());
-		
-		socketList.add(conn);
-		
-		Thread t1  = new Thread(new MySelector(),"t1");
+		Thread t1  = new Thread(new MySelector(),"t1");// 创建一个守护线程，循环便利所有的socket，监听请求是否就绪
 		
 		t1.start();
+		
+		System.out.println("start");
+		
+		while(true){
+			
+			Socket conn = server.accept();//使用accept()阻塞等待客户请求
+			
+			System.out.println("client is coming"+new Date().toGMTString());
+			
+			socketList.add(conn);// 将新的请求链接添加到队列中
+		}
 		
 	}
 	
