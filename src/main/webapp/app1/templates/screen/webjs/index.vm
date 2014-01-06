@@ -1,0 +1,11 @@
+$page.setTitle("系统webjs") ## 覆盖default中的#showHead（）
+
+<h1>webjs</h1>
+
+<ol>
+	<li>
+        <h2>addOrder</h2>
+		#set($url = "$app1Link.setTarget('webjs/addOrder.htm')")
+		<a href="$url">$url</a>
+    </li>
+</ol>
