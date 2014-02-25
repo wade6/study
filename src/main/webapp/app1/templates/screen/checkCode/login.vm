@@ -1,0 +1,15 @@
+
+<form method="post">
+	
+	<input type="hidden" name="action" value="chec_code_action"/>
+ 
+    验证码：<a href="/checkCode/login.htm"><img src="/dd.jcaptcha"></a>
+ 
+	<input type="text" name="jcaptcha" value="" />
+	
+	<input type="submit" name="event_submit_do_check"/>
+ 
+</form>
+验证结果：$!msg
+ 
+	

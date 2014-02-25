@@ -43,6 +43,7 @@ public class Download {
     public void execute(@Param("filename") String filename) throws Exception {
         // 为了增强用户体验，关闭buffering，让下载立即开始，而不是等待整个文件生成完才通知用户下载。
         brc.setBuffering(false);
+        response.reset();
 
         // 设置headers，下载文件名必须避免非us-ascii字符，因为各浏览器的兼容程度不同。
         filename = defaultIfNull(trimToNull(filename), "image") + ".txt";

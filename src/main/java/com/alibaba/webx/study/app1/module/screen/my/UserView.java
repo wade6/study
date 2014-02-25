@@ -26,5 +26,25 @@ public class UserView {
         userDO.setPassword("213");
         userService.addUser(userDO);
     }
+    
+//    protected String getFullUrl(HttpServletRequest request) {
+//
+//        StringBuffer requestUrl = new StringBuffer();
+//        if (StringUtils.isNotBlank(FilterManager.getAppServer()) || StringUtils.isNotBlank(FilterManager.getAppPort())) {
+//            String appServer = StringUtils.isNotBlank(FilterManager.getAppServer()) ? FilterManager.getAppServer() : request.getServerName();
+//            requestUrl.append(request.getScheme()).append("://").append(appServer);
+//
+//            String appPort = StringUtils.isNotBlank(FilterManager.getAppPort()) ? FilterManager.getAppPort() : String.valueOf(request.getLocalPort());
+//            if (!StringUtils.equals(appPort, "80") && !StringUtils.equals(appPort, "443")) {
+//                requestUrl.append(":" + appPort);
+//            }
+//            requestUrl.append(request.getRequestURI());
+//        } else requestUrl = request.getRequestURL();
+//
+//        if (StringUtils.isNotBlank(request.getQueryString())) {
+//            requestUrl.append("?").append(request.getQueryString());
+//        }
+//        return requestUrl.toString();
+//    }
 
 }

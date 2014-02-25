@@ -10,6 +10,9 @@
 	
 	<!-- service beans -->
 	<bean id="userService" class="com.alibaba.webx.study.app1.biz.service.impl.UserServiceImpl" />
+	
+	
+	<bean id="captchaServiceSingleton" class="com.alibaba.webx.study.app1.biz.capture.CaptchaServiceSingleton" scope="singleton" />
 
 
 </beans>
